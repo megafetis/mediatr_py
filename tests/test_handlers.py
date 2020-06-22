@@ -1,0 +1,36 @@
+from .test_classes import GetArrayQuery
+
+async def get_array_handler(request:GetArrayQuery):
+    items = list()
+
+    for i in range(0, request.items_count):
+        items.append(i)
+
+    return items
+
+def get_array_handler_sync(request:GetArrayQuery):
+    items = list()
+
+    for i in range(0, request.items_count):
+        items.append(i)
+
+    return items
+
+
+def get_array_query_behavior(request:GetArrayQuery,next):
+    request.items_count = 4
+    return next()
+
+
+async def get_array_query_behavior_3(request:GetArrayQuery,next):
+    request.items_count = 3
+    return await next()
+    
+
+async def get_array_query_behavior_6(request:GetArrayQuery,next):
+    array1 = await next()
+    array1.append(0)
+    array1.append(0)
+    array1.append(0)
+    return array1
+
