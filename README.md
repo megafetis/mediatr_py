@@ -89,6 +89,7 @@ For example, if you want to instantiate them with dependency injector or custom
 def my_class_handler_manager(handler_class,is_behavior=False):
     return handler_class()
 
+mediator = Mediator(handler_class_manager=my_class_handler_manager)
 
 ```
 PS:
