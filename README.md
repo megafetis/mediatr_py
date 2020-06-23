@@ -2,7 +2,10 @@
 
 This is an async implementation of Mediator pattern with pipline behaviors.
 
-It is a port of Mediatr [Mediatr](https://github.com/jbogard/MediatR) from .Net
+It is a port of Mediatr [Mediatr](https://github.com/jbogard/MediatR) from .Net C#
+
+Requirements:
+* Python >= 3.5
 
 ## Usage:
 
@@ -88,5 +91,9 @@ def my_class_handler_manager(handler_class,is_behavior=False):
 
 
 ```
+PS:
 
+The 'next' function in behavior is `async`, so if you want to take results or if your behavior is async, use `middle_results = await next()`
+
+Handler may be async too, if you need.
 
