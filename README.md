@@ -56,9 +56,35 @@ result = await mediator.send_async(request)
 print(result) // [0,1,2,3,4]
 
 ```
-### Using behavoirs
-
+### Using behaviors
+You can define behavior class with method 'handle' or function:
 ```py
+@Mediator.behavior
+async def get_array_query_behavior(request:GetArrayQuery,next): #behavior only for GetArrayQuery or derived classes
+    array1 = await next()
+    array1.append(5)
+    return array1
+
+@Mediator.behavior
+def common_behavior(request:object,next): #behavior for all requests because issubclass(GetArrayQuery,object)==True
+    request.timestamp = '123'
+    return next()
+
+# ...
+
+mediator = Mediator()
+request = GetArrayQuery(5)
+result = await mediator.send_async(request)
+print(result) // [0,1,2,3,4,5]
+print(request.timestamp) // '123'
+
+```
+
+#### Create yor own class handler manager function
+For example, if you want to instantiate them with dependency injector or custom 
+```py
+def my_class_handler_manager(handler_class,is_behavior=False):
+    return handler_class()
 
 
 ```
