@@ -1,0 +1,1 @@
+from mediatr import Mediator

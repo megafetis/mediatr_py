@@ -1,9 +1,9 @@
 from typing import Callable,Any
 import inspect
-from exceptions import raise_if_handler_not_found, raise_if_handler_is_invalid, raise_if_behavior_is_invalid,raise_if_request_invalid
+from mediatr.exceptions import raise_if_behavior_is_invalid, raise_if_handler_is_invalid, raise_if_handler_not_found, raise_if_request_invalid
+
 __handlers__ = {}
 __behaviors__ = {}
-__version__ = '0.1'
 
 def extract_request_type(handler,is_behavior=False) ->type:
     isfunc = inspect.isfunction(handler)

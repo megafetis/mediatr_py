@@ -1,7 +1,7 @@
 import  unittest
-from mediator import Mediator
-from tests.test_handlers import get_array_handler,GetArrayQueryHandler,common_log_behavior
-from tests.test_classes import GetArrayQuery, GetArrayQuery1
+from mediatr import Mediator
+from test_handlers import get_array_handler,GetArrayQueryHandler,common_log_behavior
+from test_classes import GetArrayQuery, GetArrayQuery1
 import asyncio
 
 

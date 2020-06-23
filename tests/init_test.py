@@ -1,8 +1,8 @@
 import unittest
 import inspect
-from mediator import Mediator,__handlers__,__behaviors__
-from .test_handlers import get_array_handler, get_array_query_behavior
-from .test_classes import GetArrayQuery
+from mediatr import Mediator,__handlers__,__behaviors__
+from test_handlers import get_array_handler, get_array_query_behavior
+from test_classes import GetArrayQuery
 
 import asyncio
 class InitMediatorTest(unittest.TestCase):

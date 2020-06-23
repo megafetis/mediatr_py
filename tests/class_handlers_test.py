@@ -1,10 +1,13 @@
 
 
-from mediator import Mediator
+
 import  unittest
 import asyncio
-from tests.test_handlers import common_log_behavior, get_array_handler, get_array_handler_sync, get_array_query_behavior, get_array_query_behavior_3, get_array_query_behavior_6, GetArrayQueryBehavior, GetArrayQueryHandler
-from tests.test_classes import GetArrayQuery1
+from test_handlers import common_log_behavior, get_array_handler, get_array_handler_sync, get_array_query_behavior, get_array_query_behavior_3, get_array_query_behavior_6, GetArrayQueryBehavior, GetArrayQueryHandler
+from test_classes import GetArrayQuery1
+from mediatr import Mediator
+
+
 class ClassHandlersTest(unittest.TestCase):
     
     def setUp(self):

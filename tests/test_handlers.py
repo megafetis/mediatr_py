@@ -1,4 +1,4 @@
-from .test_classes import GetArrayQuery,GetArrayQuery1
+from test_classes import GetArrayQuery,GetArrayQuery1
 
 async def get_array_handler(request:GetArrayQuery):
     items = list()
