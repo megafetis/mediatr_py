@@ -94,3 +94,14 @@ class Mediator():
             __behaviors__[request_type] = []
         if not any( x==behavior for x in __behaviors__[request_type]):
             __behaviors__[request_type].append(behavior)
+
+    
+    @staticmethod
+    def handler(handler):
+        Mediator.register_handler(handler)
+        return handler
+
+    @staticmethod
+    def behavior(behavior):
+        Mediator.register_behavior(behavior)
+        return behavior
