@@ -8,6 +8,9 @@ Requirements:
 * Python >= 3.5
 
 ## Usage:
+install [mediatr](https://pypi.org/project/mediatr/):
+
+`pip install mediatr`
 
 ### Define your request class
 ```py
