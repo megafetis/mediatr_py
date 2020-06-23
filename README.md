@@ -1,6 +1,6 @@
 # mediatr_py
 
-This is an implementation of Mediator pattern with pipline behaviors.
+This is an async implementation of Mediator pattern with pipline behaviors.
 
 It is a port of Mediatr [Mediatr](https://github.com/jbogard/MediatR) from .Net
 
