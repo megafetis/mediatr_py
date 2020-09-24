@@ -1,6 +1,7 @@
-from test_classes import GetArrayQuery,GetArrayQuery1
+from tests.example_queries import GetArrayQuery, GetArrayQuery1
 
-async def get_array_handler(request:GetArrayQuery):
+
+async def get_array_handler(request: GetArrayQuery):
     items = list()
 
     for i in range(0, request.items_count):
@@ -8,7 +9,8 @@ async def get_array_handler(request:GetArrayQuery):
 
     return items
 
-def get_array_handler_sync(request:GetArrayQuery):
+
+def get_array_handler_sync(request: GetArrayQuery):
     items = list()
 
     for i in range(0, request.items_count):
@@ -17,17 +19,17 @@ def get_array_handler_sync(request:GetArrayQuery):
     return items
 
 
-def get_array_query_behavior(request:GetArrayQuery,next):
+def get_array_query_behavior(request: GetArrayQuery, next):
     request.items_count = 4
     return next()
 
 
-async def get_array_query_behavior_3(request:GetArrayQuery,next):
+async def get_array_query_behavior_3(request: GetArrayQuery, next):
     request.items_count = 3
     return await next()
-    
 
-async def get_array_query_behavior_6(request:GetArrayQuery,next):
+
+async def get_array_query_behavior_6(request: GetArrayQuery, next):
     array1 = await next()
     array1.append(0)
     array1.append(0)
@@ -36,7 +38,7 @@ async def get_array_query_behavior_6(request:GetArrayQuery,next):
 
 
 class GetArrayQueryHandler():
-    def handle(self,request:GetArrayQuery1):
+    def handle(self, request: GetArrayQuery1):
         items = list()
 
         for i in range(0, request.items_count):
@@ -46,12 +48,11 @@ class GetArrayQueryHandler():
 
 
 class GetArrayQueryBehavior():
-    def handle(self,request:GetArrayQuery1,next):
+    def handle(self, request: GetArrayQuery1, next):
         request.items_count = 4
         return next()
 
 
-
-def common_log_behavior(request:object,next):
+def common_log_behavior(request: object, next):
     request.updated_at = '123'
     return next()
