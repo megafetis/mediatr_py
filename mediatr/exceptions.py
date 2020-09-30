@@ -1,8 +1,10 @@
 import inspect
 
-def raise_if_handler_not_found(handler,handlers):
+
+def raise_if_handler_not_found(handler, handlers):
     if not handler:
         raise HandlerNotFoundError(handler)
+
 
 def raise_if_request_invalid(request):
     if not request:
@@ -11,7 +13,7 @@ def raise_if_request_invalid(request):
 
 def raise_if_handler_is_invalid(handler):
     isfunc = inspect.isfunction(handler)
-    func = handler if isfunc else (handler.handle if hasattr(handler,'handle') else None)
+    func = handler if isfunc else (handler.handle if hasattr(handler, 'handle') else None)
     if not func or not inspect.isfunction(func):
         raise InvalidHandlerError()
     sign = inspect.signature(func)
@@ -20,10 +22,9 @@ def raise_if_handler_is_invalid(handler):
         raise InvalidHandlerError()
 
 
-
 def raise_if_behavior_is_invalid(behavior):
     isfunc = inspect.isfunction(behavior)
-    func = behavior if isfunc else (behavior.handle if hasattr(behavior,'handle') else None)
+    func = behavior if isfunc else (behavior.handle if hasattr(behavior, 'handle') else None)
     if not func or not inspect.isfunction(func):
         raise InvalidHandlerError()
     sign = inspect.signature(func)
@@ -44,7 +45,6 @@ class InvalidRequest(Exception):
 
 class InvalidHandlerError(Exception):
     def __init__(self, msg=None):
-        raise 
         super().__init__(msg or "Handler must be a class, that contains 'handle' method with args:(self,request:SomeRequestType) \
             or must be a function with args:(request:SomeRequestType) \
              where 'request' is object of request class. See examples on git")
