@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "00a9c4ae85dd8b7b132c8ad2e666001ebeff1ea3867ffa6aa13f429461425729"
+            "sha256": "898d2ced9a6c311c021e06a1f02f21b553a0ba3f2accac353d17b58cce30d39e"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -44,10 +44,6 @@
             "hashes": [],
             "version": "==3.0.4"
         },
-        "colorama": {
-            "hashes": [],
-            "version": "==0.4.3"
-        },
         "configparser": {
             "hashes": [],
             "markers": "python_version < '3'",
@@ -68,15 +64,12 @@
         },
         "importlib-metadata": {
             "hashes": [],
+            "markers": "python_version < '3.8'",
             "version": "==2.0.0"
         },
         "iniconfig": {
             "hashes": [],
             "version": "==1.0.1"
-        },
-        "keyring": {
-            "hashes": [],
-            "version": "==21.4.0"
         },
         "packaging": {
             "hashes": [],
@@ -84,6 +77,7 @@
         },
         "pathlib2": {
             "hashes": [],
+            "markers": "python_version < '3'",
             "version": "==2.3.5"
         },
         "pkginfo": {
@@ -122,10 +116,6 @@
             "hashes": [],
             "version": "==0.9.1"
         },
-        "rfc3986": {
-            "hashes": [],
-            "version": "==1.4.0"
-        },
         "scandir": {
             "hashes": [],
             "markers": "python_version < '3.5'",
@@ -145,7 +135,7 @@
         },
         "twine": {
             "hashes": [],
-            "version": "==3.2.0"
+            "version": "==1.15.0"
         },
         "urllib3": {
             "hashes": [],
