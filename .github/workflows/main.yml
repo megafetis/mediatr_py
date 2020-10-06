@@ -36,7 +36,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: pipenv install
-        run: pipenv --python ${{ matrix.python-version }} install --dev
+        run: PYTHONWARNINGS=ignore:DEPRECATION pipenv --python ${{ matrix.python-version }} install --dev
       - name: Run pipenv check
         run: PIPENV_PYUP_API_KEY="" pipenv check
       - name: Run pytest
