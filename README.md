@@ -59,6 +59,8 @@ request = GetArrayQuery(5)
 
 result = await mediator.send_async(request)
 
+# result = mediator.send(request) in synchronous mode
+
 print(result) // [0,1,2,3,4]
 
 ```
