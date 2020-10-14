@@ -1,11 +1,19 @@
 import unittest
 
-from mediatr import Mediator
+from mediatr import __behaviors__, __handlers__, Mediator
 from tests.example_handlers import get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync
 from tests.example_queries import GetArrayQuery, GetArrayQuery1
 
 
 class SendSyncTest(unittest.TestCase):
+    def setUp(self):
+        __handlers__.clear()
+        __behaviors__.clear()
+
+    def tearDown(self):
+        __handlers__.clear()
+        __behaviors__.clear()
+
     async def test_dispatch_sync(self):
         Mediator.register_handler(get_array_handler_sync)
         Mediator.register_handler(GetArrayQueryHandler)
