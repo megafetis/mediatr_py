@@ -131,16 +131,15 @@ class Mediator():
             yield handler_func(request)
 
         gen = start_func()
-        if inspect.iscoroutinefunction(self):
-            async def next_func():
-                return await __return_await__(next(gen))
-
-            return __get_result_block__(next_func())
-        else:
-            def next_func():
-                return __return_await__(next(gen))
-            return __get_result_block__(next_func())
-        # return await __return_await__(result)
+        async def next_func():
+            return await  __return_await__(next(gen))
+        # if inspect.iscoroutinefunction(self):
+        #     async def next_func():
+        #         return await __return_await__(next(gen))
+        # else:
+        #     def next_func():
+        #         return __return_await__(next(gen))
+        return __get_result_block__(next_func())
 
     @staticmethod
     def register_handler(handler):

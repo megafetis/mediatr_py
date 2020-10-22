@@ -1,6 +1,6 @@
 from tests.example_queries import GetArrayQuery, GetArrayQuery1
-
-
+from mediatr import Mediator
+from typing import Callable 
 async def get_array_handler(request: GetArrayQuery):
     items = list()
 
@@ -55,4 +55,13 @@ class GetArrayQueryBehavior():
 
 def common_log_behavior(request: object, next):
     request.updated_at = '123'
+    return next()
+
+
+def print_before(request:object,next:Callable):
+    print(request.__class__.__name__)
+    if hasattr(request,'common_bahavior_handled'):
+        request.common_bahavior_handled = True
+
+    print('common_bahavior_handled ')
     return next()

@@ -1,7 +1,7 @@
 import unittest
 
 from mediatr import __behaviors__, __handlers__, Mediator
-from tests.example_handlers import get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync
+from tests.example_handlers import get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync,print_before
 from tests.example_queries import GetArrayQuery, GetArrayQuery1
 
 
@@ -14,10 +14,11 @@ class SendSyncTest(unittest.TestCase):
         __handlers__.clear()
         __behaviors__.clear()
 
-    async def test_dispatch_sync(self):
+    def test_dispatch_sync(self):
         Mediator.register_handler(get_array_handler_sync)
         Mediator.register_handler(GetArrayQueryHandler)
         Mediator.register_behavior(common_log_behavior)
+        Mediator.register_behavior(print_before)
         mediator = Mediator()
         query1 = GetArrayQuery(5)
         result1 = mediator.send(query1)
@@ -27,6 +28,10 @@ class SendSyncTest(unittest.TestCase):
         result2 = mediator.send(query2)
         self.assertEqual(len(result2), 4)
         self.assertIsNotNone(query2.updated_at)
+        self.assertEqual(query1.updated_at,'123')
+        self.assertEqual(query2.updated_at,'123')
+        self.assertTrue(query2.common_bahavior_handled)
+
 
     def test_dispatch_sync_without_behavior(self):
         Mediator.register_handler(get_array_handler_sync)

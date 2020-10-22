@@ -14,3 +14,4 @@ class GetArrayQuery1():
         self.items_count = items_count
 
     items_count = 0
+    common_bahavior_handled = False
