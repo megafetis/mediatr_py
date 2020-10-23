@@ -73,7 +73,7 @@ request = GetArrayQuery(5)
 
 result = await Mediator.send_async(request)
 # or:
-result = mediator.send(request) #in synchronous mode. Async handlers and behaviors will executed with blocking
+result = Mediator.send(request) #in synchronous mode. Async handlers and behaviors will executed with blocking
 
 print(result) // [0,1,2,3,4]
 
