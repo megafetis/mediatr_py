@@ -8,6 +8,11 @@ from mediatr.exceptions import raise_if_behavior_is_invalid, raise_if_handler_is
 __handlers__ = {}
 __behaviors__ = {}
 
+@staticmethod
+def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
+    return HandlerCls()
+
+
 
 def __get_result_block__(resp: Awaitable):
     loop = asyncio.new_event_loop()
@@ -46,13 +51,13 @@ def find_behaviors(request):
 class Mediator():
     """Class of mediator as entry point to send requests and get responses"""
 
+    handler_class_manager = default_handler_class_manager
+    
     def __init__(self, handler_class_manager: Callable = None):
-        if not handler_class_manager:
-            self.handler_class_manager = lambda X, is_behavior=False: X()
+        if handler_class_manager:
+            self.handler_class_manager = handler_class_manager
 
-    handler_class_manager = None
-
-    async def send_async(self, request) -> Awaitable:
+    async def send_async(self, request=None) -> Awaitable:
         """
         Send request in async mode and getting response
 
@@ -64,6 +69,9 @@ class Mediator():
         awaitable response
 
         """
+        self1 = Mediator if not request else self
+        request = request or self
+
         raise_if_request_invalid(request)
         handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
         raise_if_handler_not_found(handler, __handlers__)
@@ -72,7 +80,7 @@ class Mediator():
         if inspect.isfunction(handler):
             handler_func = handler
         else:
-            handler_obj = self.handler_class_manager(handler)
+            handler_obj = self1.handler_class_manager(handler)
             handler_func = handler_obj.handle
         behaviors = find_behaviors(request)
         gen = None
@@ -82,7 +90,7 @@ class Mediator():
                 if inspect.isfunction(behavior):
                     beh_func = behavior
                 else:
-                    beh_obj = self.handler_class_manager(behavior, True)
+                    beh_obj = self1.handler_class_manager(behavior, True)
                     beh_func = beh_obj.handle
                 yield beh_func(request, next_func)
             yield handler_func(request)
@@ -91,11 +99,9 @@ class Mediator():
 
         async def next_func():
             return await __return_await__(next(gen))
-
         return await next_func()
-        # return await __return_await__(result)
 
-    def send(self, request):
+    def send(self, request=None):
         """
         Send request in synchronous mode and getting response
         
@@ -107,6 +113,10 @@ class Mediator():
         response object or `None`
         
         """
+        
+        self1 = Mediator if not request else self
+        request = request or self
+
         raise_if_request_invalid(request)
         handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
         raise_if_handler_not_found(handler, __handlers__)
@@ -115,7 +125,7 @@ class Mediator():
         if inspect.isfunction(handler):
             handler_func = handler
         else:
-            handler_obj = self.handler_class_manager(handler)
+            handler_obj = self1.handler_class_manager(handler)
             handler_func = handler_obj.handle
         behaviors = find_behaviors(request)
         gen = None
@@ -125,7 +135,7 @@ class Mediator():
                 if inspect.isfunction(behavior):
                     beh_func = behavior
                 else:
-                    beh_obj = self.handler_class_manager(behavior, True)
+                    beh_obj = self1.handler_class_manager(behavior, True)
                     beh_func = beh_obj.handle
                 yield beh_func(request, next_func)
             yield handler_func(request)
@@ -133,12 +143,6 @@ class Mediator():
         gen = start_func()
         async def next_func():
             return await  __return_await__(next(gen))
-        # if inspect.iscoroutinefunction(self):
-        #     async def next_func():
-        #         return await __return_await__(next(gen))
-        # else:
-        #     def next_func():
-        #         return __return_await__(next(gen))
         return __get_result_block__(next_func())
 
     @staticmethod
