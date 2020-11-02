@@ -114,13 +114,29 @@ print(request.timestamp) // '123'
 
 ```
 
-#### Create yor own class handler manager function
+#### Using custom handler (behavior) factory for handlers (behaviors) as classes
 
-For example, if you want to instantiate them with dependency injector or custom 
+If your handlers or behaviors registered as functions, it just executes them.
+
+In case with handlers or behaviors, declared as classes with method `handle` Mediator uses function, that instantiates handlers or behaviors:
+
+```py
+def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
+    return HandlerCls()
+
+```
+
+
+For example, if you want to instantiate them with dependency injector or custom, pass your own factory function to Mediator:
 
 ```py
 def my_class_handler_manager(handler_class, is_behavior=False):
-    return handler_class()
+    
+    if is_behavior:
+        # custom logic
+        pass
+
+    return injector.get(handler_class)
 
 mediator = Mediator(handler_class_manager=my_class_handler_manager)
 
@@ -128,7 +144,7 @@ mediator = Mediator(handler_class_manager=my_class_handler_manager)
 PS:
 
 
-The 'next' function in behavior is `async`, so if you want to take results or if your behavior is async, use `middle_results = await next()`
+The `next` function in behavior is `async`, so if you want to take results or if your behavior is async, use `middle_results = await next()`
 
 
 Handler may be async too, if you need.
