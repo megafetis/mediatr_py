@@ -10,11 +10,11 @@ setup(
   version = __version__,     
   license="MIT -or- Apache License 2.0",
 #   long_description=Path(__file__).with_name("README.md").read_text('utf-8'),
-  description="Implementation of Mediator pattern and CQRS with pipline behaviors for Python 3.5+",
+  description="mediator pattern and CQRS implementation with pipline behaviors for Python 3.5+",
   author = 'Evgeniy Fetisov',               
   author_email = 'me@efetisov.ru',  
   url = 'https://github.com/megafetis/mediatr_py',
-  keywords = ['mediatr', 'Mediator', 'CQRS','pipline', 'behaviors', 'Command', 'Query', 'Responsability', 'Segregation' ], 
+  keywords = ['mediator','mediatr', 'CQRS','cqrs','pipline', 'behaviors', 'command', 'query', 'responsability', 'segregation','command bus','bus' ], 
   python_requires=">=3.5",
   classifiers=[
     'Development Status :: 5 - Production/Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
