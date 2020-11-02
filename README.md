@@ -8,12 +8,15 @@ Requirements:
 * Python >= 3.5
 
 ## Usage:
+
 install [mediatr](https://pypi.org/project/mediatr/):
 
 `pip install mediatr`
 
 ### Define your request class
+
 ```py
+
 class GetArrayQuery():
     def __init__(self,items_count:int):
         self.items_count = items_count
@@ -35,6 +38,7 @@ async def get_array_handler(request:GetArrayQuery):
 # or just Mediator.register_handler(get_array_handler)
     
 ```
+
 or class:
 
 ```py
@@ -50,6 +54,7 @@ class GetArrayQueryHandler():
 ```
 
 ### Run mediator
+
 ```py
 import Mediator from mediatr
 
@@ -66,6 +71,7 @@ print(result) // [0,1,2,3,4]
 ```
 
 ### Run mediator statically, without instance
+
 ```py
 import Mediator from mediatr
 
@@ -85,6 +91,7 @@ By default class handlers are instantiated with simple init:  `SomeRequestHandle
 
 ### Using behaviors
 You can define behavior class with method 'handle' or function:
+
 ```py
 @Mediator.behavior
 async def get_array_query_behavior(request:GetArrayQuery, next): #behavior only for GetArrayQuery or derived classes
@@ -108,7 +115,9 @@ print(request.timestamp) // '123'
 ```
 
 #### Create yor own class handler manager function
+
 For example, if you want to instantiate them with dependency injector or custom 
+
 ```py
 def my_class_handler_manager(handler_class, is_behavior=False):
     return handler_class()
@@ -118,7 +127,9 @@ mediator = Mediator(handler_class_manager=my_class_handler_manager)
 ```
 PS:
 
+
 The 'next' function in behavior is `async`, so if you want to take results or if your behavior is async, use `middle_results = await next()`
+
 
 Handler may be async too, if you need.
 
