@@ -1,5 +1,9 @@
 # mediatr_py
 
+[![PyPI](https://img.shields.io/pypi/v/mediatr)](https://pypi.org/project/mediatr)
+[![Python](https://img.shields.io/pypi/pyversions/mediatr)](https://pypi.org/project/mediatr) 
+[![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr) 
+
 This is an async implementation of Mediator pattern with pipline behaviors.
 
 It is a port of [Mediatr](https://github.com/jbogard/MediatR) from .Net C#
