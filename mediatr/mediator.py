@@ -52,9 +52,6 @@ def find_behaviors(request):
 
 
 class Mediator():
-    pass
-
-class Mediator(Mediator):
     """Class of mediator as entry point to send requests and get responses"""
 
     handler_class_manager = default_handler_class_manager
@@ -63,7 +60,7 @@ class Mediator(Mediator):
         if handler_class_manager:
             self.handler_class_manager = handler_class_manager
 
-    async def send_async(self: Union[Mediator,GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> Awaitable[TResponse]:
+    async def send_async(self: Union["Mediator",GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> Awaitable[TResponse]:
         """
         Send request in async mode and getting response
 
@@ -107,7 +104,7 @@ class Mediator(Mediator):
             return await __return_await__(next(gen))
         return await next_func()
 
-    def send(self: Union[Mediator, GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> TResponse:
+    def send(self: Union["Mediator", GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> TResponse:
         """
         Send request in synchronous mode and getting response
         
