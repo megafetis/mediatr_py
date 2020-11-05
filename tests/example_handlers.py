@@ -1,4 +1,4 @@
-from tests.example_queries import GetArrayQuery, GetArrayQuery1
+from tests.example_queries import GetArrayQuery, GetArrayQuery1, QueryWithTypedResponse, SomeQueryResponseModel
 from mediatr import Mediator
 from typing import Callable 
 async def get_array_handler(request: GetArrayQuery):
@@ -65,3 +65,9 @@ def print_before(request:object,next:Callable):
 
     print('common_bahavior_handled ')
     return next()
+
+
+
+class QueryWithTypedResponseHandler():
+    def handle(self, request:QueryWithTypedResponse):
+        return SomeQueryResponseModel(request.some_name)

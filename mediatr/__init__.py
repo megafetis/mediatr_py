@@ -2,7 +2,7 @@ from .mediator import (
     Mediator,
     __handlers__,
     __behaviors__,
-    
+    GenericQuery,
     extract_request_type,
     find_behaviors
     )

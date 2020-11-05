@@ -1,7 +1,7 @@
 import unittest
 
 from mediatr import __behaviors__, __handlers__, Mediator
-from tests.example_handlers import get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync,print_before
+from tests.example_handlers import GetArrayQueryHandler, common_log_behavior, get_array_handler_sync,print_before
 from tests.example_queries import GetArrayQuery, GetArrayQuery1
 
 

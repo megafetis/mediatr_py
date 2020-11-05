@@ -93,7 +93,7 @@ Note that instantiation of `Mediator(handler_class_manager = my_manager_func)` i
 By default class handlers are instantiated with simple init:  `SomeRequestHandler()`. handlers or behaviors as functions are executed directly. 
 
 
-### Using behaviors
+## Using behaviors
 You can define behavior class with method 'handle' or function:
 
 ```py
@@ -118,7 +118,7 @@ print(request.timestamp) // '123'
 
 ```
 
-#### Using custom handler (behavior) factory for handlers (behaviors) as classes
+## Using custom handler (behavior) factory for handlers (behaviors) as classes
 
 If your handlers or behaviors registered as functions, it just executes them.
 
@@ -153,3 +153,44 @@ The `next` function in behavior is `async`, so if you want to take results or if
 
 Handler may be async too, if you need.
 
+## Using with generic typing support (version >= 1.2):
+
+```py
+
+from mediatr import Mediator, GenericQuery
+
+
+class UserModel(BaseModel): # For example sqlalchemy ORM entity
+    id = Column(String,primary_key=True)
+    name = Column(String)
+
+
+class FetchUserQuery(GenericQuery[UserModel])
+    def __init__(self,user_id:str):
+        self.user_id = user_id
+
+
+mediator = Mediator()
+
+request = FetchUserQuery(user_id = "123456")
+
+user = mediator.send(request) # type of response will be a UserModel
+
+
+# -------------------------------------------------------------
+
+
+class FetchUserQueryHandler():
+
+    def handle(self, request:FetchUserQuery):
+        db_session = Session() #sqlalchemy session
+        return db_session.query(UserModel).filter(UserModel.id == request.user_id).one()
+
+# or handler as simple function:
+
+def fetch_user_query_handler(request:FetchUserQuery):
+    db_session = Session() #sqlalchemy session
+    return db_session.query(UserModel).filter(UserModel.id == request.user_id).one()
+
+
+```
