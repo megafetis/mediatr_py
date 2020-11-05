@@ -1,8 +1,8 @@
 import unittest
 
 from mediatr import __behaviors__, __handlers__, Mediator
-from tests.example_handlers import get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync,print_before
-from tests.example_queries import GetArrayQuery, GetArrayQuery1
+from tests.example_handlers import QueryWithTypedResponseHandler, get_array_handler, GetArrayQueryHandler, common_log_behavior, get_array_handler_sync,print_before
+from tests.example_queries import GetArrayQuery, GetArrayQuery1, QueryWithTypedResponse
 
 
 class SendStaticMediatorTest(unittest.TestCase):
@@ -18,6 +18,7 @@ class SendStaticMediatorTest(unittest.TestCase):
         
         Mediator.register_handler(get_array_handler_sync)
         Mediator.register_handler(GetArrayQueryHandler)
+        Mediator.register_handler(QueryWithTypedResponseHandler)
         Mediator.register_behavior(common_log_behavior)
         Mediator.register_behavior(print_before)
 
@@ -33,3 +34,10 @@ class SendStaticMediatorTest(unittest.TestCase):
         self.assertEqual(query2.updated_at,'123')
         self.assertTrue(query2.common_bahavior_handled)
 
+
+    def test_static_generic(self):
+        Mediator.register_handler(QueryWithTypedResponseHandler)
+       
+        genericQuery = QueryWithTypedResponse(name="mediatr 123")
+        respModel = Mediator.send(genericQuery)
+        self.assertEqual(genericQuery.some_name,respModel.some_name)
