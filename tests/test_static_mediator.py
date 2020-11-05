@@ -21,7 +21,7 @@ class SendStaticMediatorTest(unittest.TestCase):
         Mediator.register_handler(QueryWithTypedResponseHandler)
         Mediator.register_behavior(common_log_behavior)
         Mediator.register_behavior(print_before)
-
+        
         query1 = GetArrayQuery(5)
         result1 = Mediator.send(query1)
         self.assertEqual(len(result1), 5)
