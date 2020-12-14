@@ -15,19 +15,6 @@ class GenericQuery(Generic[TResponse]):
 def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
     return HandlerCls()
 
-
-
-def __get_result_block__(resp: Awaitable):
-    current_loop = asyncio.get_event_loop()
-    if current_loop and not current_loop.is_closed():
-        return current_loop.run_until_complete(resp)
-
-    loop = asyncio.new_event_loop()
-    results = loop.run_until_complete(resp)
-    loop.close()
-    return results
-
-
 def extract_request_type(handler, is_behavior=False) -> type:
     isfunc = inspect.isfunction(handler)
     func = handler if isfunc else (handler.handle if hasattr(handler, 'handle') else None)
@@ -90,23 +77,21 @@ class Mediator():
             handler_obj = self1.handler_class_manager(handler)
             handler_func = handler_obj.handle
         behaviors = find_behaviors(request)
-        gen = None
 
-        def start_func():
-            for behavior in behaviors:
-                if inspect.isfunction(behavior):
-                    beh_func = behavior
-                else:
-                    beh_obj = self1.handler_class_manager(behavior, True)
-                    beh_func = beh_obj.handle
-                yield beh_func(request, next_func)
-            yield handler_func(request)
+        behaviors.append(lambda r,next: handler_func(r))
 
-        gen = start_func()
+        async def start_func(i:int):
+            beh = behaviors[i]
+            beh_func = None
+            if inspect.isfunction(beh):
+                beh_func = beh
+            else:
+                beh_obj = self1.handler_class_manager(beh, True)
+                beh_func = beh_obj.handle
+            return await __return_await__(beh_func(request,lambda: start_func(i+1)))
+            
+        return await start_func(0)
 
-        async def next_func():
-            return await __return_await__(next(gen))
-        return await next_func()
 
     def send(self: Union["Mediator", GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> TResponse:
         """
@@ -135,22 +120,19 @@ class Mediator():
             handler_obj = self1.handler_class_manager(handler)
             handler_func = handler_obj.handle
         behaviors = find_behaviors(request)
-        gen = None
+        behaviors.append(lambda r,next: handler_func(r))
 
-        def start_func():
-            for behavior in behaviors:
-                if inspect.isfunction(behavior):
-                    beh_func = behavior
-                else:
-                    beh_obj = self1.handler_class_manager(behavior, True)
-                    beh_func = beh_obj.handle
-                yield beh_func(request, next_func)
-            yield handler_func(request)
-
-        gen = start_func()
-        async def next_func():
-            return await  __return_await__(next(gen))
-        return __get_result_block__(next_func())
+        def start_func(i:int):
+            beh = behaviors[i]
+            beh_func = None
+            if inspect.isfunction(beh):
+                beh_func = beh
+            else:
+                beh_obj = self1.handler_class_manager(beh, True)
+                beh_func = beh_obj.handle
+            return beh_func(request,lambda: start_func(i+1))
+        return start_func(0)
+             
 
     @staticmethod
     def register_handler(handler):

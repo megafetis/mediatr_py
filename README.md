@@ -74,6 +74,11 @@ print(result) // [0,1,2,3,4]
 
 ```
 
+> If you are using synchronous `mediator.send(request)` method, try to define synchronous handlers and behaviors
+>
+> In another case use `asyncio` module for manual manage of event loop in synchronous code
+
+
 ### Run mediator statically, without instance
 
 ```py
