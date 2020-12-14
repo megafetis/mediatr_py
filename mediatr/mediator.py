@@ -18,6 +18,10 @@ def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
 
 
 def __get_result_block__(resp: Awaitable):
+    current_loop = asyncio.get_event_loop()
+    if current_loop and not current_loop.is_closed():
+        return current_loop.run_until_complete(resp)
+
     loop = asyncio.new_event_loop()
     results = loop.run_until_complete(resp)
     loop.close()
