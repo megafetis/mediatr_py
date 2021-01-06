@@ -199,3 +199,5 @@ def fetch_user_query_handler(request:FetchUserQuery):
 
 
 ```
+
+Please give a star if the library is useful for you :smiley:
