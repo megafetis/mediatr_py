@@ -56,6 +56,7 @@ class GetArrayQueryBehavior():
 def common_log_behavior(request: object, next):
     request.updated_at = '123'
     return next()
+  
 
 
 def print_before(request:object,next:Callable):

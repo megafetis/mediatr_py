@@ -74,6 +74,11 @@ print(result) // [0,1,2,3,4]
 
 ```
 
+> If you are using synchronous `mediator.send(request)` method, try to define synchronous handlers and behaviors
+>
+> In another case use `asyncio` module for manual manage of event loop in synchronous code
+
+
 ### Run mediator statically, without instance
 
 ```py
@@ -83,7 +88,7 @@ request = GetArrayQuery(5)
 
 result = await Mediator.send_async(request)
 # or:
-result = Mediator.send(request) #in synchronous mode. Async handlers and behaviors will executed with blocking
+result = Mediator.send(request) #in synchronous mode. Async handlers and behaviors will not blocking!
 
 print(result) // [0,1,2,3,4]
 
@@ -194,3 +199,5 @@ def fetch_user_query_handler(request:FetchUserQuery):
 
 
 ```
+
+Please give a star if the library is useful for you :smiley:
