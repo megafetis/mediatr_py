@@ -144,7 +144,7 @@
                 "sha256:c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e"
             ],
             "index": "pypi",
-            "version": "==6.1.2"
+            "version": "==6.2.2"
         },
         "readme-renderer": {
             "hashes": [
@@ -194,7 +194,7 @@
                 "sha256:a3d22aab467b4682a22de4a422632e79d07eebd07ff2a7079effb13f8a693787"
             ],
             "index": "pypi",
-            "version": "==1.15.0"
+            "version": "==3.4.1"
         },
         "urllib3": {
             "hashes": [
