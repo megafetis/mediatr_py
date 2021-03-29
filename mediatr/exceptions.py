@@ -13,7 +13,7 @@ def raise_if_request_invalid(request):
 
 def raise_if_handler_is_invalid(handler):
     isfunc = inspect.isfunction(handler)
-    func = handler if isfunc else (handler.handle if hasattr(handler, 'handle') else None)
+    func = handler if isfunc else (handler.__class__.handle if hasattr(handler, 'handle') else None)
     if not func or not inspect.isfunction(func):
         raise InvalidHandlerError()
     sign = inspect.signature(func)
