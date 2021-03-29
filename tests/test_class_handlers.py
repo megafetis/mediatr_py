@@ -4,7 +4,8 @@ import unittest
 from mediatr import Mediator
 from tests.example_handlers import common_log_behavior, get_array_query_behavior_3, get_array_query_behavior_6, \
     GetArrayQueryBehavior, \
-    GetArrayQueryHandler
+    GetArrayQueryHandler, \
+    GetArrayQueryHandlerWithConstructor
 from tests.example_queries import GetArrayQuery1
 
 
@@ -38,3 +39,17 @@ class ClassHandlersTest(unittest.TestCase):
         self.assertEqual(query.items_count, 4)
         array_count = len(result)
         self.assertEqual(4, array_count)
+
+    def test_3(self):
+        class Client:
+            def test_3(self):
+                return 'test_3'
+        get_array_query_handler_with_constructor = GetArrayQueryHandlerWithConstructor(Client)
+        Mediator.register_handler(get_array_query_handler_with_constructor)
+        query = GetArrayQuery1(5)
+        self.assertEqual(query.items_count, 5)
+        result = self.ioloop.run_until_complete(self.mediator.send_async(query))
+        self.assertEqual(query.items_count, 4)
+        array_count = len(result)
+        self.assertEqual(4, array_count)
+        
