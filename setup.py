@@ -17,14 +17,14 @@ setup(
   packages = ['mediatr'],  
   version = __version__,     
   license="MIT -or- Apache License 2.0",
-  description="mediator and CQRS pattern implementation with pipline behaviors for Python 3.5+. Mediatr py",
+  description="mediator and CQRS pattern implementation with pipline behaviors for Python 3.6+. Mediatr py",
   long_description_content_type='text/markdown',
   long_description=long_description,
   author = 'Evgeniy Fetisov',               
   author_email = 'me@efetisov.ru',  
   url = 'https://github.com/megafetis/mediatr_py',
   keywords = ['mediator','mediatr', 'CQRS','cqrs','mediatr_py','mediator py','mediatr py','pipline', 'behaviors', 'command', 'query', 'responsability', 'segregation','command bus','bus' ], 
-  python_requires=">=3.5",
+  python_requires=">=3.6",
   
   classifiers=[
     'Development Status :: 5 - Production/Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
@@ -35,9 +35,9 @@ setup(
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
   ],
 )
