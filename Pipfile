@@ -4,8 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "6.1.2"
-twine = "1.15.0"
+pytest = "*"
+twine = "*"
 
 [packages]
 
