@@ -17,7 +17,16 @@ def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
 
 def extract_request_type(handler, is_behavior=False) -> type:
     isfunc = inspect.isfunction(handler)
-    func = handler if isfunc else (handler.__class__.handle if hasattr(handler, 'handle') else None)
+    
+    func = None
+    if isfunc:
+        func = handler
+    else:
+        if hasattr(handler, 'handle'):
+            if inspect.isfunction(handler.handle):
+                func = handler.handle
+            elif inspect.ismethod(handler.handle):
+                func = handler.__class__.handle
 
     if is_behavior:
         raise_if_behavior_is_invalid(handler)
