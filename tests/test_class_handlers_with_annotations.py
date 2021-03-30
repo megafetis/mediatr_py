@@ -3,8 +3,6 @@ import asyncio
 import unittest
 
 from mediatr import Mediator
-from tests.example_handlers_annotations import GetArrayQueryHandlerWithAnnotations
-from tests.example_queries import GetArrayQueryWithAnnotations
 
 
 class ClassHandlersTest(unittest.TestCase):
@@ -15,6 +13,8 @@ class ClassHandlersTest(unittest.TestCase):
 
     @unittest.skipUnless(sys.version_info >= (3,7), "requires 3.7+")
     def test_1(self):
+        from tests.example_handlers_annotations import GetArrayQueryHandlerWithAnnotations
+        from tests.example_queries import GetArrayQueryWithAnnotations
         Mediator.register_handler(GetArrayQueryHandlerWithAnnotations)
         query = GetArrayQueryWithAnnotations(5)
         self.assertEqual(query.items_count, 5)
