@@ -76,7 +76,11 @@ class Mediator():
         request = request or self
 
         raise_if_request_invalid(request)
-        handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
+        handler = None
+        if __handlers__.get(request.__class__):
+            handler = __handlers__[request.__class__]
+        elif __handlers__.get(request.__class__.__name__):
+            handler =__handlers__[request.__class__.__name__]
         raise_if_handler_not_found(handler, __handlers__)
         handler_func = None
         handler_obj = None
@@ -119,7 +123,11 @@ class Mediator():
         request = request or self
 
         raise_if_request_invalid(request)
-        handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
+        handler = None
+        if __handlers__.get(request.__class__):
+            handler = __handlers__[request.__class__]
+        elif __handlers__.get(request.__class__.__name__):
+            handler =__handlers__[request.__class__.__name__]
         raise_if_handler_not_found(handler, __handlers__)
         handler_func = None
         handler_obj = None

@@ -36,26 +36,13 @@ async def get_array_query_behavior_6(request: GetArrayQuery, next):
     array1.append(0)
     return array1
 
-
 class GetArrayQueryHandler():
     def handle(self, request: GetArrayQuery1):
         items = list()
 
         for i in range(0, request.items_count):
             items.append(i)
-
-        return items
-
-class GetArrayQueryHandlerWithConstructor():
-    def __init__(self, client):
-        self.client = client
-
-    def handle(self, request: GetArrayQuery1):
-        items = list()
-
-        for i in range(0, request.items_count):
-            items.append(i)
-
+        
         return items
 
 class GetArrayQueryBehavior():
