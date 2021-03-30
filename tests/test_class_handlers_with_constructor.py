@@ -17,7 +17,6 @@ class ClassHandlersTest(unittest.TestCase):
             def test_1(self):
                 return 'test_3'
         get_array_query_handler_with_constructor = GetArrayQueryHandlerWithConstructor(Client)
-        print(get_array_query_handler_with_constructor)
         Mediator.register_handler(get_array_query_handler_with_constructor)
         query = GetArrayQueryWithConstructor(5)
         self.assertEqual(query.items_count, 5)
