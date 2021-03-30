@@ -6,6 +6,7 @@ class GetArrayQuery():
 
     items_count = 0
 
+
 class BaseQuery():
     pass
 
@@ -17,6 +18,7 @@ class GetArrayQuery1():
     items_count = 0
     common_bahavior_handled = False
 
+
 class GetArrayQueryWithConstructor():
     def __init__(self, items_count: int):
         self.items_count = items_count
@@ -24,12 +26,14 @@ class GetArrayQueryWithConstructor():
     items_count = 0
     common_bahavior_handled = False
 
+
 class GetArrayQueryWithAnnotations():
     def __init__(self, items_count: int):
         self.items_count = items_count
 
     items_count = 0
     common_bahavior_handled = False
+
 
 class SomeQueryResponseModel():
     def __init__(self,name:str) -> None:

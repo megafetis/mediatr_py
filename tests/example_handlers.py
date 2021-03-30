@@ -36,14 +36,15 @@ async def get_array_query_behavior_6(request: GetArrayQuery, next):
     array1.append(0)
     return array1
 
+
 class GetArrayQueryHandler():
     def handle(self, request: GetArrayQuery1):
         items = list()
 
         for i in range(0, request.items_count):
             items.append(i)
-        
         return items
+
 
 class GetArrayQueryBehavior():
     def handle(self, request: GetArrayQuery1, next):
