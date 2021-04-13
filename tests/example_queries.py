@@ -19,6 +19,20 @@ class GetArrayQuery1():
     common_bahavior_handled = False
 
 
+class GetArrayQueryWithConstructor():
+    def __init__(self, items_count: int):
+        self.items_count = items_count
+
+    items_count = 0
+    common_bahavior_handled = False
+
+
+class GetArrayQueryWithAnnotations():
+    def __init__(self, items_count: int):
+        self.items_count = items_count
+
+    items_count = 0
+    common_bahavior_handled = False
 
 
 class SomeQueryResponseModel():

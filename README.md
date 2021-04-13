@@ -9,7 +9,7 @@ This is an async implementation of Mediator pattern with pipline behaviors.
 It is a port of [Mediatr](https://github.com/jbogard/MediatR) from .Net C#
 
 Requirements:
-* Python >= 3.5
+* Python >= 3.6
 
 ## Usage:
 

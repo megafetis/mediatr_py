@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+typing-extensions = "*"
 twine = "*"
 urllib3 = ">=1.26.4"
 

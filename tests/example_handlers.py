@@ -43,7 +43,6 @@ class GetArrayQueryHandler():
 
         for i in range(0, request.items_count):
             items.append(i)
-
         return items
 
 
