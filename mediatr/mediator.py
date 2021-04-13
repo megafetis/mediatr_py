@@ -17,7 +17,16 @@ def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
 
 def extract_request_type(handler, is_behavior=False) -> type:
     isfunc = inspect.isfunction(handler)
-    func = handler if isfunc else (handler.handle if hasattr(handler, 'handle') else None)
+    
+    func = None
+    if isfunc:
+        func = handler
+    else:
+        if hasattr(handler, 'handle'):
+            if inspect.isfunction(handler.handle):
+                func = handler.handle
+            elif inspect.ismethod(handler.handle):
+                func = handler.__class__.handle
 
     if is_behavior:
         raise_if_behavior_is_invalid(handler)
@@ -54,20 +63,20 @@ class Mediator():
     async def send_async(self: Union["Mediator",GenericQuery[TResponse]], request: Optional[GenericQuery[TResponse]] = None) -> Awaitable[TResponse]:
         """
         Send request in async mode and getting response
-
         Args:
         request (`object`): object of request class
-
         Returns:
-
         awaitable response
-
         """
         self1 = Mediator if not request else self
         request = request or self
 
         raise_if_request_invalid(request)
-        handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
+        handler = None
+        if __handlers__.get(request.__class__):
+            handler = __handlers__[request.__class__]
+        elif __handlers__.get(request.__class__.__name__):
+            handler =__handlers__[request.__class__.__name__]
         raise_if_handler_not_found(handler, __handlers__)
         handler_func = None
         handler_obj = None
@@ -99,9 +108,7 @@ class Mediator():
         
         Args:
         request (`object`): object of request class
-
         Returns:
-
         response object or `None`
         
         """
@@ -110,7 +117,11 @@ class Mediator():
         request = request or self
 
         raise_if_request_invalid(request)
-        handler = __handlers__[request.__class__] if __handlers__.get(request.__class__) else None
+        handler = None
+        if __handlers__.get(request.__class__):
+            handler = __handlers__[request.__class__]
+        elif __handlers__.get(request.__class__.__name__):
+            handler =__handlers__[request.__class__.__name__]
         raise_if_handler_not_found(handler, __handlers__)
         handler_func = None
         handler_obj = None
