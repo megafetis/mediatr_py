@@ -4,6 +4,8 @@
 [![Python](https://img.shields.io/pypi/pyversions/mediatr)](https://pypi.org/project/mediatr) 
 [![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr) 
 
+<a href="https://www.buymeacoffee.com/megafetis" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
 This is an async implementation of Mediator pattern with pipline behaviors.
 
 It is a port of [Mediatr](https://github.com/jbogard/MediatR) from .Net C#
