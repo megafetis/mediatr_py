@@ -1,8 +1,8 @@
 # mediatr_py
 
-[![PyPI](https://img.shields.io/pypi/v/mediatr)](https://pypi.org/project/mediatr)
-[![Python](https://img.shields.io/pypi/pyversions/mediatr)](https://pypi.org/project/mediatr) 
-[![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr) 
+[![PyPI](https://img.shields.io/pypi/v/mediatr/1.2.6)](https://pypi.org/project/mediatr/1.2.6/)
+[![Python](https://img.shields.io/pypi/pyversions/mediatr/1.2.6)](https://pypi.org/project/mediatr/1.2.6) 
+[![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr/1.2.6) 
 
 This is an async implementation of Mediator pattern with pipline behaviors.
 
@@ -13,9 +13,9 @@ Requirements:
 
 ## Usage:
 
-install [mediatr](https://pypi.org/project/mediatr/):
+install [mediatr](https://pypi.org/project/mediatr/1.2.6):
 
-`pip install mediatr`
+`pip install mediatr==1.2.6`
 
 ### Define your request class
 
