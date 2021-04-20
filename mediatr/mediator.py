@@ -3,7 +3,7 @@ import inspect
 from typing import Any, Awaitable, Callable, Optional, TypeVar, Generic, Union
 
 from mediatr.exceptions import raise_if_behavior_is_invalid, raise_if_handler_is_invalid, raise_if_handler_not_found, \
-    raise_if_request_invalid
+    raise_if_request_none
 
 __handlers__ = {}
 __behaviors__ = {}
@@ -71,13 +71,13 @@ class Mediator():
         self1 = Mediator if not request else self
         request = request or self
 
-        raise_if_request_invalid(request)
+        raise_if_request_none(request)
         handler = None
         if __handlers__.get(request.__class__):
             handler = __handlers__[request.__class__]
         elif __handlers__.get(request.__class__.__name__):
             handler =__handlers__[request.__class__.__name__]
-        raise_if_handler_not_found(handler, __handlers__)
+        raise_if_handler_not_found(handler, request)
         handler_func = None
         handler_obj = None
         if inspect.isfunction(handler):
@@ -116,13 +116,13 @@ class Mediator():
         self1 = Mediator if not request else self
         request = request or self
 
-        raise_if_request_invalid(request)
+        raise_if_request_none(request)
         handler = None
         if __handlers__.get(request.__class__):
             handler = __handlers__[request.__class__]
         elif __handlers__.get(request.__class__.__name__):
             handler =__handlers__[request.__class__.__name__]
-        raise_if_handler_not_found(handler, __handlers__)
+        raise_if_handler_not_found(handler, request)
         handler_func = None
         handler_obj = None
         if inspect.isfunction(handler):
