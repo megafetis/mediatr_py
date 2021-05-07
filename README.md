@@ -186,7 +186,7 @@ user = mediator.send(request) # type of response will be a UserModel
 
 # -------------------------------------------------------------
 
-
+@Mediator.handler
 class FetchUserQueryHandler():
 
     def handle(self, request:FetchUserQuery):
@@ -194,7 +194,7 @@ class FetchUserQueryHandler():
         return db_session.query(UserModel).filter(UserModel.id == request.user_id).one()
 
 # or handler as simple function:
-
+@Mediator.handler
 def fetch_user_query_handler(request:FetchUserQuery):
     db_session = Session() #sqlalchemy session
     return db_session.query(UserModel).filter(UserModel.id == request.user_id).one()
