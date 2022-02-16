@@ -2,7 +2,10 @@ import asyncio
 import unittest
 
 from mediatr import Mediator
-from tests.example_handlers_constructur import setup_class_handler_manager, GetArrayQueryHandlerWithConstructor
+from tests.example_handlers_constructur import (
+    setup_class_handler_manager,
+    GetArrayQueryHandlerWithConstructor,
+)
 from tests.example_queries import GetArrayQueryWithConstructor
 
 
@@ -15,8 +18,11 @@ class ClassHandlersTest(unittest.TestCase):
     def test_1(self):
         class Client:
             def test_1(self):
-                return 'test_3'
-        get_array_query_handler_with_constructor = GetArrayQueryHandlerWithConstructor(Client)
+                return "test_3"
+
+        get_array_query_handler_with_constructor = GetArrayQueryHandlerWithConstructor(
+            Client
+        )
         Mediator.register_handler(get_array_query_handler_with_constructor)
         query = GetArrayQueryWithConstructor(5)
         self.assertEqual(query.items_count, 5)

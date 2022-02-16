@@ -2,7 +2,11 @@ import asyncio
 import unittest
 
 from mediatr import Mediator
-from tests.example_handlers import common_log_behavior, get_array_handler, GetArrayQueryHandler
+from tests.example_handlers import (
+    common_log_behavior,
+    get_array_handler,
+    GetArrayQueryHandler,
+)
 from tests.example_queries import GetArrayQuery, GetArrayQuery1
 
 

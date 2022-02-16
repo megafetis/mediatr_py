@@ -2,14 +2,17 @@ import asyncio
 import unittest
 
 from mediatr import Mediator
-from tests.example_handlers import common_log_behavior, get_array_query_behavior_3, get_array_query_behavior_6, \
-    GetArrayQueryBehavior, \
-    GetArrayQueryHandler
+from tests.example_handlers import (
+    common_log_behavior,
+    get_array_query_behavior_3,
+    get_array_query_behavior_6,
+    GetArrayQueryBehavior,
+    GetArrayQueryHandler,
+)
 from tests.example_queries import GetArrayQuery1
 
 
 class ClassHandlersTest(unittest.TestCase):
-
     def setUp(self):
         self.mediator = Mediator()
         self.ioloop = asyncio.get_event_loop()

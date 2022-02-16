@@ -26,7 +26,7 @@ class InitMediatorTest(unittest.TestCase):
         self.assertTrue(inspect.isfunction(Mediator.register_handler))
 
     def test_is_func_class_method(self):
-        class Class1():
+        class Class1:
             async def method1(self):
                 pass
 
@@ -35,19 +35,19 @@ class InitMediatorTest(unittest.TestCase):
     def test_dict_key(self):
         dict1 = {}
 
-        class Class1():
+        class Class1:
             pass
 
         dict1[Class1] = 123
         self.assertEqual(123, dict1[Class1])
 
     def test_class_method_sep(self):
-        class Class1():
-            name = 'ff'
+        class Class1:
+            name = "ff"
 
             def func(self, arg1):
                 return self.name + arg1
 
         obj = Class1()
         meth = obj.func
-        self.assertEqual('fff', meth('f'))
+        self.assertEqual("fff", meth("f"))

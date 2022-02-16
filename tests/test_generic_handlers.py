@@ -17,8 +17,7 @@ class SendGenericRequestTest(unittest.TestCase):
     def test_first(self):
         mediator = Mediator()
         Mediator.register_handler(QueryWithTypedResponseHandler)
-       
+
         genericQuery = QueryWithTypedResponse(name="mediatr 123")
         respModel = mediator.send(genericQuery)
-        self.assertEqual(genericQuery.some_name,respModel.some_name)
-
+        self.assertEqual(genericQuery.some_name, respModel.some_name)

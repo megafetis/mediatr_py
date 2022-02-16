@@ -4,13 +4,13 @@ from .mediator import (
     __behaviors__,
     GenericQuery,
     extract_request_type,
-    find_behaviors
-    )
+    find_behaviors,
+)
 from .exceptions import (
     HandlerNotFoundError,
     InvalidRequest,
     InvalidHandlerError,
-    InvalidBehaviorError
+    InvalidBehaviorError,
 )
 
 from ._version import __version__
@@ -26,5 +26,5 @@ __all__ = [
     "HandlerNotFoundError",
     "InvalidRequest",
     "InvalidHandlerError",
-    "InvalidBehaviorError"
+    "InvalidBehaviorError",
 ]

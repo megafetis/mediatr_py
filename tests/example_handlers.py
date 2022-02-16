@@ -1,6 +1,13 @@
-from tests.example_queries import GetArrayQuery, GetArrayQuery1, QueryWithTypedResponse, SomeQueryResponseModel
+from tests.example_queries import (
+    GetArrayQuery,
+    GetArrayQuery1,
+    QueryWithTypedResponse,
+    SomeQueryResponseModel,
+)
 from mediatr import Mediator
-from typing import Callable 
+from typing import Callable
+
+
 async def get_array_handler(request: GetArrayQuery):
     items = list()
 
@@ -37,7 +44,7 @@ async def get_array_query_behavior_6(request: GetArrayQuery, next):
     return array1
 
 
-class GetArrayQueryHandler():
+class GetArrayQueryHandler:
     def handle(self, request: GetArrayQuery1):
         items = list()
 
@@ -46,28 +53,26 @@ class GetArrayQueryHandler():
         return items
 
 
-class GetArrayQueryBehavior():
+class GetArrayQueryBehavior:
     def handle(self, request: GetArrayQuery1, next):
         request.items_count = 4
         return next()
 
 
 def common_log_behavior(request: object, next):
-    request.updated_at = '123'
+    request.updated_at = "123"
     return next()
-  
 
 
-def print_before(request:object,next:Callable):
+def print_before(request: object, next: Callable):
     print(request.__class__.__name__)
-    if hasattr(request,'common_bahavior_handled'):
+    if hasattr(request, "common_bahavior_handled"):
         request.common_bahavior_handled = True
 
-    print('common_bahavior_handled ')
+    print("common_bahavior_handled ")
     return next()
 
 
-
-class QueryWithTypedResponseHandler():
-    def handle(self, request:QueryWithTypedResponse):
+class QueryWithTypedResponseHandler:
+    def handle(self, request: QueryWithTypedResponse):
         return SomeQueryResponseModel(request.some_name)

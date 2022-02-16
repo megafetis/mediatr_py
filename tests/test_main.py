@@ -2,8 +2,13 @@ import asyncio
 import unittest
 
 from mediatr import __behaviors__, __handlers__, Mediator
-from tests.example_handlers import get_array_handler, get_array_handler_sync, get_array_query_behavior, \
-    get_array_query_behavior_3, get_array_query_behavior_6
+from tests.example_handlers import (
+    get_array_handler,
+    get_array_handler_sync,
+    get_array_query_behavior,
+    get_array_query_behavior_3,
+    get_array_query_behavior_6,
+)
 from tests.example_queries import GetArrayQuery
 
 
