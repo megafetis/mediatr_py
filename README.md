@@ -1,8 +1,8 @@
 # mediatr_py
 
 [![PyPI](https://img.shields.io/pypi/v/mediatr)](https://pypi.org/project/mediatr)
-[![Python](https://img.shields.io/pypi/pyversions/mediatr)](https://pypi.org/project/mediatr) 
-[![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr) 
+[![Python](https://img.shields.io/pypi/pyversions/mediatr)](https://pypi.org/project/mediatr)
+[![Downloads](https://img.shields.io/pypi/dm/mediatr)](https://pypi.org/project/mediatr)
 
 <a href="https://www.buymeacoffee.com/megafetis" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
@@ -11,7 +11,8 @@ This is an async implementation of Mediator pattern with pipline behaviors.
 It is a port of [Mediatr](https://github.com/jbogard/MediatR) from .Net C#
 
 Requirements:
-* Python >= 3.6
+
+- Python >= 3.6
 
 ## Usage:
 
@@ -32,7 +33,7 @@ class GetArrayQuery():
 ### Define your handler class or function
 
 ```py
-import Mediator from mediatr
+from mediatr import Mediator
 
 @Mediator.handler
 async def get_array_handler(request:GetArrayQuery):
@@ -40,9 +41,9 @@ async def get_array_handler(request:GetArrayQuery):
     for i in range(0, request.items_count):
         items.append(i)
     return items
-    
+
 # or just Mediator.register_handler(get_array_handler)
-    
+
 ```
 
 or class:
@@ -55,14 +56,14 @@ class GetArrayQueryHandler():
         for i in range(0, request.items_count):
             items.append(i)
         return items
-        
+
 # or just Mediator.register_handler(GetArrayQueryHandler)
 ```
 
 ### Run mediator
 
 ```py
-import Mediator from mediatr
+from mediatr import Mediator
 
 mediator = Mediator()
 
@@ -80,11 +81,10 @@ print(result) // [0,1,2,3,4]
 >
 > In another case use `asyncio` module for manual manage of event loop in synchronous code
 
-
 ### Run mediator statically, without instance
 
 ```py
-import Mediator from mediatr
+from mediatr import Mediator
 
 request = GetArrayQuery(5)
 
@@ -97,10 +97,10 @@ print(result) // [0,1,2,3,4]
 ```
 
 Note that instantiation of `Mediator(handler_class_manager = my_manager_func)` is useful if you have custom handlers creation. For example using an injector.
-By default class handlers are instantiated with simple init:  `SomeRequestHandler()`. handlers or behaviors as functions are executed directly. 
-
+By default class handlers are instantiated with simple init: `SomeRequestHandler()`. handlers or behaviors as functions are executed directly.
 
 ## Using behaviors
+
 You can define behavior class with method 'handle' or function:
 
 ```py
@@ -137,12 +137,11 @@ def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
 
 ```
 
-
 For example, if you want to instantiate them with dependency injector or custom, pass your own factory function to Mediator:
 
 ```py
 def my_class_handler_manager(handler_class, is_behavior=False):
-    
+
     if is_behavior:
         # custom logic
         pass
@@ -152,11 +151,10 @@ def my_class_handler_manager(handler_class, is_behavior=False):
 mediator = Mediator(handler_class_manager=my_class_handler_manager)
 
 ```
+
 PS:
 
-
 The `next` function in behavior is `async`, so if you want to take results or if your behavior is async, use `middle_results = await next()`
-
 
 Handler may be async too, if you need.
 
