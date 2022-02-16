@@ -1,6 +1,7 @@
 from tests.example_queries import GetArrayQueryWithConstructor
 from mediatr import Mediator
-from typing import Callable 
+from typing import Callable
+
 
 def setup_class_handler_manager(handler_class: type, is_behavior=False):
     if is_behavior:
@@ -9,7 +10,8 @@ def setup_class_handler_manager(handler_class: type, is_behavior=False):
 
     return handler_class
 
-class GetArrayQueryHandlerWithConstructor():
+
+class GetArrayQueryHandlerWithConstructor:
     def __init__(self, client):
         self.client = client
 
@@ -18,5 +20,5 @@ class GetArrayQueryHandlerWithConstructor():
 
         for i in range(0, request.items_count):
             items.append(i)
-            
+
         return items

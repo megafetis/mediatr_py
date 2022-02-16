@@ -1,7 +1,7 @@
 import inspect
 
 
-def raise_if_handler_not_found(handler,request):
+def raise_if_handler_not_found(handler, request):
     if not handler:
         raise HandlerNotFoundError(request)
 
@@ -18,7 +18,7 @@ def raise_if_handler_is_invalid(handler):
     if isfunc:
         func = handler
     else:
-        if hasattr(handler, 'handle'):
+        if hasattr(handler, "handle"):
             if inspect.isfunction(handler.handle):
                 func = handler.handle
             elif inspect.ismethod(handler.handle):
@@ -34,7 +34,11 @@ def raise_if_handler_is_invalid(handler):
 
 def raise_if_behavior_is_invalid(behavior):
     isfunc = inspect.isfunction(behavior)
-    func = behavior if isfunc else (behavior.handle if hasattr(behavior, 'handle') else None)
+    func = (
+        behavior
+        if isfunc
+        else (behavior.handle if hasattr(behavior, "handle") else None)
+    )
     if not func or not inspect.isfunction(func):
         raise InvalidHandlerError(func)
     sign = inspect.signature(func)
@@ -57,14 +61,22 @@ class InvalidRequest(Exception):
 class InvalidHandlerError(Exception):
     def __init__(self, handler):
         self.handler = handler
-        super().__init__("Incorrect handler: '{}'. Handler must be a class, that contains 'handle' method with args:(self,request:SomeRequestType) \
+        super().__init__(
+            "Incorrect handler: '{}'. Handler must be a class, that contains 'handle' method with args:(self,request:SomeRequestType) \
             or must be a function with args:(request:SomeRequestType) \
-             where 'request' is object of request class. See examples on git".format(handler))
+             where 'request' is object of request class. See examples on git".format(
+                handler
+            )
+        )
 
 
 class InvalidBehaviorError(Exception):
     def __init__(self, behavior):
         self.behavior = behavior
-        super().__init__("Incorrect behavior: '{}'. Behavior must be a class, that contains 'handle' method with args:(self,request:SomeRequestTypeOrObject,next) \
+        super().__init__(
+            "Incorrect behavior: '{}'. Behavior must be a class, that contains 'handle' method with args:(self,request:SomeRequestTypeOrObject,next) \
             or must be a function with args:(request:SomeRequestTypeOrObject,next) \
-             where 'next' is coroutine function. See examples on git".format(behavior))
+             where 'next' is coroutine function. See examples on git".format(
+                behavior
+            )
+        )

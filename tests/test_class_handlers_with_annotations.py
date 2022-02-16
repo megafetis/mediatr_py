@@ -11,10 +11,13 @@ class ClassHandlersTest(unittest.TestCase):
         self.ioloop = asyncio.get_event_loop()
         return super().setUp()
 
-    @unittest.skipUnless(sys.version_info >= (3,7), "requires 3.7+")
+    @unittest.skipUnless(sys.version_info >= (3, 7), "requires 3.7+")
     def test_1(self):
-        from tests.example_handlers_annotations import GetArrayQueryHandlerWithAnnotations
+        from tests.example_handlers_annotations import (
+            GetArrayQueryHandlerWithAnnotations,
+        )
         from tests.example_queries import GetArrayQueryWithAnnotations
+
         Mediator.register_handler(GetArrayQueryHandlerWithAnnotations)
         query = GetArrayQueryWithAnnotations(5)
         self.assertEqual(query.items_count, 5)
