@@ -15,14 +15,14 @@ def default_handler_class_manager(HandlerCls:type,is_behavior:bool=False):
     return HandlerCls()
 
 def extract_request_type(handler, is_behavior=False) -> type:
-    isfunc = inspect.isfunction(handler)
+    isfunc = inspect.isroutine(handler)
     
     func = None
     if isfunc:
         func = handler
     else:
         if hasattr(handler, 'handle'):
-            if inspect.isfunction(handler.handle):
+            if inspect.isroutine(handler.handle):
                 func = handler.handle
             elif inspect.ismethod(handler.handle):
                 func = handler.__class__.handle
@@ -83,7 +83,7 @@ class Mediator():
         raise_if_handler_not_found(handler,request)
         handler_func = None
         handler_obj = None
-        if inspect.isfunction(handler):
+        if inspect.isroutine(handler):
             handler_func = handler
         else:
             handler_obj = self1.handler_class_manager(handler)
@@ -95,7 +95,7 @@ class Mediator():
         async def start_func(i:int):
             beh = behaviors[i]
             beh_func = None
-            if inspect.isfunction(beh):
+            if inspect.isroutine(beh):
                 beh_func = beh
             else:
                 beh_obj = self1.handler_class_manager(beh, True)
@@ -130,7 +130,7 @@ class Mediator():
         raise_if_handler_not_found(handler,request)
         handler_func = None
         handler_obj = None
-        if inspect.isfunction(handler):
+        if inspect.isroutine(handler):
             handler_func = handler
         else:
             handler_obj = self1.handler_class_manager(handler)
@@ -141,7 +141,7 @@ class Mediator():
         def start_func(i:int):
             beh = behaviors[i]
             beh_func = None
-            if inspect.isfunction(beh):
+            if inspect.isroutine(beh):
                 beh_func = beh
             else:
                 beh_obj = self1.handler_class_manager(beh, True)
