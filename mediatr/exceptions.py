@@ -12,14 +12,14 @@ def raise_if_request_none(request):
 
 
 def raise_if_handler_is_invalid(handler):
-    isfunc = inspect.isroutine(handler)
+    isfunc = inspect.isfunction(handler)
 
     func = None
     if isfunc:
         func = handler
     else:
         if hasattr(handler, 'handle'):
-            if inspect.isroutine(handler.handle):
+            if inspect.isfunction(handler.handle):
                 func = handler.handle
             elif inspect.ismethod(handler.handle):
                 func = handler.__class__.handle
@@ -33,9 +33,9 @@ def raise_if_handler_is_invalid(handler):
 
 
 def raise_if_behavior_is_invalid(behavior):
-    isfunc = inspect.isroutine(behavior)
+    isfunc = inspect.isfunction(behavior)
     func = behavior if isfunc else (behavior.handle if hasattr(behavior, 'handle') else None)
-    if not func or not inspect.isroutine(func):
+    if not func or not inspect.isfunction(func):
         raise InvalidHandlerError(func)
     sign = inspect.signature(func)
     params_l = len(sign.parameters.keys())
